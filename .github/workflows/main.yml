@@ -1,0 +1,54 @@
+# PDF Air for iPad
+
+Apple only allows App Store apps to be installed in the usual way, so PDF Air for iPad is a
+**home-screen app**. GitHub builds it and gives it its own web address. You add it to your
+iPad's home screen once, and from then on it opens like any other app, with the airplane icon,
+full screen and **without internet**.
+
+It's free. Your PDFs stay on your iPad and are never uploaded anywhere.
+
+## Step 1: Make a repository (about 10 minutes, once)
+
+1. Sign in at github.com. Click **New repository** and name it `pdf-air-ipad`.
+2. Choose **Public**. GitHub's free web address only works for public repositories.
+   Only the PDF Air program is public; your PDFs are never put there.
+3. Click **Create repository**, then **uploading an existing file**.
+   Drag in `pdf-air-ipad.zip` exactly as it is (don't unzip it), then click **Commit changes**.
+4. Open **Settings** › **Pages** (left side). Under **Build and deployment** › **Source**,
+   choose **GitHub Actions**.
+5. Open the **Actions** tab, click **set up a workflow yourself**, delete what's in the editor,
+   paste in the contents of `pdf-air-ipad/.github/workflows/build-ipad.yml` from the zip,
+   and click **Commit changes**.
+6. In **Actions**, open the run named **Build PDF Air for iPad**. After a green check
+   (about 3–5 minutes), click it: the address is shown under **build**, for example
+   `https://YOUR-NAME.github.io/pdf-air-ipad/`.
+
+If you see a red X, click it, open the step with the red X and send Claude a screenshot.
+
+## Step 2: Put it on your iPad
+
+1. On the iPad, open **Safari** (it must be Safari) and go to the address from step 1.
+2. Tap the **Share** button (square with an arrow), then **Add to Home Screen**, then **Add**.
+3. Open **PDF Air** from the home screen while you have internet and leave it open for about a
+   minute. It stores the PDF engine, fonts and text recognition for offline use.
+
+The start screen should say **PDF Air 3.2.0 · iPad app**.
+
+## Using it on iPad
+
+- **Open:** tap the folder button and pick a PDF from Files, iCloud Drive or another storage app.
+- **Save and Export:** the share sheet opens. Choose **Save to Files** and pick a folder.
+  If PDF Air says the file is ready, tap **Save to Files…**.
+- **Share and Print** use the normal iPad share sheet and print window.
+- **Apple Pencil** works with the drawing, highlighter and signature tools.
+- **Read aloud** uses the iPad's own voices. More voices: **Settings › Accessibility ›
+  Spoken Content › Voices**.
+
+## Good to know
+
+- Apple doesn't let home-screen apps become the PDF app for **Open in** or double-tapping a PDF
+  in Files. Open files from inside PDF Air instead.
+- Your autosave, version history and settings stay on the iPad. If you delete PDF Air from
+  the home screen, they're deleted too.
+- **Updating:** upload the new `pdf-air-ipad.zip` to the same repository (replace the old one).
+  GitHub rebuilds it. On the iPad, open PDF Air with internet, close it and open it again.
