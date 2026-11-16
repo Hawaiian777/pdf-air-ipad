@@ -20,12 +20,15 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Unpack PDF Air
         run: |
-          if [ -f pdf-air-ipad.zip ]; then rm -rf pdf-air-ipad && unzip -q pdf-air-ipad.zip; fi
-          if [ ! -d pdf-air-ipad/site ]; then echo "Upload pdf-air-ipad.zip to this repository first."; exit 1; fi
+          z=$(ls *.zip 2>/dev/null | head -n 1)
+          if [ -n "$z" ]; then rm -rf pdf-air-ipad && unzip -q -o "$z"; fi
+          if [ ! -d pdf-air-ipad/site ] && [ -d site ]; then mkdir -p pdf-air-ipad && cp -r site prepare-web.ps1 pdf-air-ipad/; fi
+          echo "Files in this repository:"; ls -la
+          if [ ! -d pdf-air-ipad/site ]; then echo "::error title=PDF Air files not found::Upload pdf-air-ipad.zip (not unzipped) to this repository, then run this again."; exit 1; fi
 
       - name: Build in the offline files
         shell: pwsh
@@ -33,7 +36,7 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: pdf-air-ipad/site
 
